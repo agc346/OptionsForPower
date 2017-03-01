@@ -1,0 +1,33 @@
+ECHO OFF
+CLS
+:MENU
+ECHO.
+ECHO ...............................................
+ECHO Version 0.02 November 10th 2016 12:52
+ECHO PRESS 1, 2 OR 3 to select your task, or 4 to EXIT.
+ECHO ...............................................
+ECHO.
+ECHO A - Abort Shutdown
+ECHO L - Force Lock Computer
+ECHO S - Force Shutdown Computer
+ECHO R - Force Restart Computer
+ECHO X - EXIT
+ECHO.
+SET /P M=Type l, s, r, or x then press ENTER:
+IF %M%==a GOTO ABORT
+IF %M%==l GOTO LOCK
+IF %M%==s GOTO SHUTDOWN
+IF %M%==r GOTO RESTART
+IF %M%==x GOTO EOF
+:ABORT
+shutdown /a
+GOTO MENU
+:LOCK
+shutdown /l /f
+GOTO MENU
+:SHUTDOWN
+shutdown /s /f /t 0
+GOTO MENU
+:RESTART
+shutdown /r /f /t 0
+GOTO MENU
