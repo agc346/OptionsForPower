@@ -3,31 +3,32 @@ CLS
 :MENU
 ECHO.
 ECHO ...............................................
-ECHO Version 0.02 November 10th 2016 12:52
+ECHO Version 0.03 February 23rd 2017 16:40
 ECHO PRESS 1, 2 OR 3 to select your task, or 4 to EXIT.
 ECHO ...............................................
 ECHO.
 ECHO A - Abort Shutdown
-ECHO L - Force Lock Computer
+ECHO L - Force Logoff Computer
 ECHO S - Force Shutdown Computer
 ECHO R - Force Restart Computer
 ECHO X - EXIT
 ECHO.
 SET /P M=Type l, s, r, or x then press ENTER:
+SET /P target=Enter desired Target HostName: 
 IF %M%==a GOTO ABORT
 IF %M%==l GOTO LOCK
 IF %M%==s GOTO SHUTDOWN
 IF %M%==r GOTO RESTART
 IF %M%==x GOTO EOF
 :ABORT
-shutdown /a
+shutdown /m \\%target% /a
 GOTO MENU
 :LOCK
-shutdown /l /f
+shutdown /m \\%target% /l /f
 GOTO MENU
 :SHUTDOWN
-shutdown /s /f /t 0
+shutdown /m \\%target% /s /f /t 0
 GOTO MENU
 :RESTART
-shutdown /r /f /t 0
+shutdown /m \\%target% /r /f /t 0
 GOTO MENU
