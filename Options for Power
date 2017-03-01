@@ -1,9 +1,10 @@
 ECHO OFF
 CLS
-:MENU
+:OFPMENU
 ECHO.
 ECHO ...............................................
-ECHO Version 0.03 February 23rd 2017 16:40
+ECHO #### OPTIONS FOR POWER ####
+ECHO Version 0.04 February 24th 2017 11:47
 ECHO PRESS 1, 2 OR 3 to select your task, or 4 to EXIT.
 ECHO ...............................................
 ECHO.
@@ -14,21 +15,61 @@ ECHO R - Force Restart Computer
 ECHO X - EXIT
 ECHO.
 SET /P M=Type l, s, r, or x then press ENTER:
+SET /P ttype=Enter L for local host or R for Remote:
 SET /P target=Enter desired Target HostName: 
 IF %M%==a GOTO ABORT
 IF %M%==l GOTO LOCK
 IF %M%==s GOTO SHUTDOWN
 IF %M%==r GOTO RESTART
 IF %M%==x GOTO EOF
+
 :ABORT
-shutdown /m \\%target% /a
-GOTO MENU
+IF %ttype%==l GOTO ABORTL
+IF %ttype%==r GOTO ABORTR
+
+:ABORTL
+shutdown /a
+GOTO OFPMENU
+
+:ABORTR
+ECHO Such an operation is not supported
+GOTO OFPMENU
+
+
 :LOCK
-shutdown /m \\%target% /l /f
-GOTO MENU
+IF %ttype%==l GOTO LOCKL
+IF %ttype%==r GOTO LOCKR
+
+:LOCKL
+shutdown /l /f
+GOTO OFPMENU
+
+:LOCKR
+ECHO Such an operation is not supported
+GOTO OFPMENU
+
+
 :SHUTDOWN
+IF %ttype%==l GOTO SHUTDOWNL
+IF %ttype%==r GOTO SHUTDOWNR
+
+:SHUTDOWNL
+shutdown /l /f
+GOTO OFPMENU
+
+:SHUTDOWNR
 shutdown /m \\%target% /s /f /t 0
-GOTO MENU
+GOTO OFPMENU
+
+
 :RESTART
+IF %ttype%==l GOTO RESTARTL
+IF %ttype%==r GOTO RESTARTR
+
+:RESTARTL
+shutdown /s /f /t 0
+GOTO OFPMENU
+
+:RESTARTR
 shutdown /m \\%target% /r /f /t 0
-GOTO MENU
+GOTO OFPMENU
