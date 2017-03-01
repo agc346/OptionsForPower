@@ -1,0 +1,17 @@
+
+Current Version:
+Version 0.04 February 24th 2017 11:47
+Added ability to control both local and remote computers, added "such an operation is not supported" to alert users to unsupported configurations, Changed MENU to OFPMENU
+Fixed:
+Known Issues: Cannot remotely abort or lock
+
+Version 0.03 February 23rd 2017 16:40
+Added ability to control computers that were on the network
+Fixed:
+Known Issues: Cannot remotely abort or lock
+
+
+Version 0.02 November 10th 2016 12:52
+Added ability to use 4 major functions of shutdown, restart, abort, and lock for use on local computer
+Fixed: Shutdown when attempting to lock
+Known Issues: Logs off user when lock is selected 
